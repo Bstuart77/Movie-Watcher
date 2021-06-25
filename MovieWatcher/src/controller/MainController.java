@@ -38,9 +38,12 @@ public class MainController implements Initializable {
 		try {
 			Statement statement = conn.createStatement();
 
-			statement.execute(
-					"INSERT INTO moviesAndShows(movieName, rating)" + "VALUES('" + movie + "','" + rating + "')");
+			statement.execute("INSERT INTO moviesAndShows(movieName, rating)" + "VALUES('" + movie + "','" + rating + "')");
 
+			
+			movieBox.setText("");
+			ratingBox.getSelectionModel().clearSelection();;
+			System.out.println(movie + " " + rating + " inputted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
