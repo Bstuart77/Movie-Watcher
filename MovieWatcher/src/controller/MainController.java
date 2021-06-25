@@ -4,49 +4,54 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import model.Utilities;
 
-public class MainController implements Initializable{
-@FXML private TextField movieBox;
-@FXML private ComboBox<String> ratingBox;
+public class MainController implements Initializable {
+	@FXML
+	private TextField movieBox;
+	@FXML
+	private ComboBox<String> ratingBox;
 
+	public void insert(ActionEvent event) throws Exception {
 
-public void insert() throws Exception {
-	String movie = movieBox.getText();
-	String rating = ratingBox.getSelectionModel().getSelectedItem().toString();
-	
-	Date date = new Date(); // This object contains the current date value
-	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-	
-	System.out.println(movie + " "  + rating);
-	
-	Connection conn = Utilities.getConnection();
+		if (movieBox.getText().isBlank()) {
+			Alert alert = new Alert(AlertType.WARNING, "INVALID MOVIE NAME");
+			alert.showAndWait();
+		} else if (ratingBox.getSelectionModel().isEmpty()) {
+			Alert alert = new Alert(AlertType.WARNING, "INVALID RATING");
+			alert.showAndWait();
+		}
 
-	try {
-	Statement statement = conn.createStatement();
-	
-	statement.execute("INSERT INTO moviesAndShows(movieName, rating, timeWatched)" + "VALUES('" + movie  + rating + date + "')");
+		String movie = movieBox.getText();
+		String rating = ratingBox.getSelectionModel().getSelectedItem().toString();
 
-	} catch (SQLException e) {
-	// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
-		Utilities.closeConnection(conn);
+		Connection conn = Utilities.connect();
+		try {
+			Statement statement = conn.createStatement();
+
+			statement.execute(
+					"INSERT INTO moviesAndShows(movieName, rating)" + "VALUES('" + movie + "','" + rating + "')");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			Utilities.closeConnection(conn);
+		}
 	}
-}
 
-
-@Override
-public void initialize(URL arg0, ResourceBundle arg1) {
-	// TODO Auto-generated method stub
-	ratingBox.getItems().addAll("1","2","3","4","5","6","7","8","9","10");
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		ratingBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 	}
 }
