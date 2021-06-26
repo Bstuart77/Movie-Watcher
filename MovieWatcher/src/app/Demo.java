@@ -20,6 +20,12 @@ public class Demo extends Application {
 		Connection conn = null;
 		conn = Utilities.connect();
 		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery("SELECT * FROM moviesandshows");
+		
+//		while (rs.next()) {		//uncomment out to see all movies and rating
+//System.out.println("Movie Name: " + rs.getString("movieName") + ", Rating: " + rs.getInt("rating"));
+//		}
+
 		statement.setQueryTimeout(30); // not required, if DB doesnt respond in 30 seconds, it will quit. not
 										// required by good to have
 		launch(args);
