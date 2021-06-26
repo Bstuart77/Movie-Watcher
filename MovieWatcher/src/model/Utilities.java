@@ -9,7 +9,7 @@ public class Utilities {
 	public static Connection connect() throws ClassNotFoundException, SQLException {
 		Connection conn = null;
 		try {
-			conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/MoviesAndShowsdb", "root","Mydickisitchy12");
+			conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/moviesandshows", "root","Mydickisitchy12");
 			return conn;
 
 		} catch (Exception e) {
