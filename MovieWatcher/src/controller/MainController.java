@@ -10,16 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Utilities;
 
 public class MainController implements Initializable {
-	@FXML
-	private TextField movieBox;
-	@FXML
-	private ComboBox<String> ratingBox;
+	@FXML private TextField movieBox;
+	@FXML private ComboBox<String> ratingBox;
+	@FXML private TextArea commentBox;
 
 	public void insert(ActionEvent event) throws Exception {
 
@@ -33,16 +33,19 @@ public class MainController implements Initializable {
 
 		String movie = movieBox.getText();
 		String rating = ratingBox.getSelectionModel().getSelectedItem().toString();
+		String comment = commentBox.getText();
 
 		Connection conn = Utilities.connect();
 		try {
 			Statement statement = conn.createStatement();
 
-			statement.execute("INSERT INTO moviesAndShows(movieName, rating)" + "VALUES('" + movie + "','" + rating + "')");
+			statement.execute("INSERT INTO moviesAndShows(movieName, rating, comments)" + "VALUES('" + movie + "','" + rating + "','" + comment + "')");
 
 			
 			movieBox.setText("");
-			ratingBox.getSelectionModel().clearSelection();;
+			ratingBox.getSelectionModel().clearSelection();
+			commentBox.setText("");
+			
 			System.out.println(movie + " " + rating + " inputted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
