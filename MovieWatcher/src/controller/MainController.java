@@ -29,7 +29,10 @@ public class MainController implements Initializable {
 		} else if (ratingBox.getSelectionModel().isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING, "INVALID RATING");
 			alert.showAndWait();
-		}
+		}else if(commentBox.getText().isBlank()) {
+			Alert alert = new Alert(AlertType.WARNING, "ADD COMMENTS");
+			alert.showAndWait();
+		}else {
 
 		String movie = movieBox.getText();
 		String rating = ratingBox.getSelectionModel().getSelectedItem().toString();
@@ -54,7 +57,7 @@ public class MainController implements Initializable {
 			Utilities.closeConnection(conn);
 		}
 	}
-
+}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
