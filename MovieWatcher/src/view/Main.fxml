@@ -8,10 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.MainController">
    <children>
-      <Button layoutX="75.0" layoutY="241.0" mnemonicParsing="false" onAction="#insert" text="Insert" />
-      <Button layoutX="467.0" layoutY="254.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="211.0" layoutY="236.0" mnemonicParsing="false" onAction="#insert" prefHeight="32.0" prefWidth="81.0" text="Insert" />
       <TextField fx:id="movieBox" layoutX="61.0" layoutY="51.0" promptText="Movie Name" />
       <ComboBox fx:id="ratingBox" layoutX="61.0" layoutY="138.0" prefWidth="150.0" promptText="Rating.." />
       <TextArea fx:id="commentBox" layoutX="300.0" layoutY="51.0" prefHeight="148.0" prefWidth="177.0" wrapText="true" />
